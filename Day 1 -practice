@@ -1,0 +1,606 @@
+# Day 1 - SQL Practice (MySQL)
+
+## 📚 Project Overview
+
+This project demonstrates basic SQL operations using MySQL.
+
+## 🗂 Database
+
+* COLLEGE
+
+## 📌 Tables Created
+
+* STUDENTS
+* COURSES
+* TEACHERS
+* DEPARTMENTS
+* BOOKS
+* EMPLOYEES
+* CUSTOMERS
+* ORDERS
+* PRODUCTS
+* PAYMENTS
+
+## ⚙️ Concepts Covered
+
+* CREATE DATABASE
+* CREATE TABLE
+* INSERT INTO
+* SELECT queries
+* Basic constraints (PRIMARY KEY, NOT NULL)
+
+## 🚀 Learning Outcome
+
+Gained hands-on experience in creating and managing databases and tables in MySQL.
+
+## 🧠 Note
+
+Errors like data type mismatch, table naming issues, and syntax mistakes were encountered and resolved during practice.
+
+---
+
+🔥 This is part of my SQL learning journey. More updates coming soon!
+
+  
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 22
+Server version: 9.7.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE COLLEGE;
+Query OK, 1 row affected (7.225 sec)
+
+mysql> USE COLLEGE;
+Database changed
+mysql> CREATE TABLE STUDENTS
+    -> (
+    -> STD_ID INT,
+    -> NAME VARCHAR(50),
+    -> AGE INT,
+    -> GENDER VARCHAR(10)
+    -> );
+Query OK, 0 rows affected (7.034 sec)
+
+mysql> INSERT INTO STUDENTS VALUES(1,'AMIT',20,'MALE');
+Query OK, 1 row affected (6.488 sec)
+
+mysql> INSERT INTO STUDENTS VALUES(2,'SNEHA',19,'FEMALE');
+Query OK, 1 row affected (5.079 sec)
+
+mysql> INSERT INTO STUDENTS VALUES(3,'RAHUL',11,'MALE');
+Query OK, 1 row affected (4.729 sec)
+
+mysql> INSERT INTO STUDENTS VALUES(4,'PRIYA',12,'FEMALE');
+Query OK, 1 row affected (5.108 sec)
+
+mysql> INSERT INTO STUDENTS VALUES(5,'KARAN',20,'MALE');
+Query OK, 1 row affected (5.118 sec)
+
+mysql> SELECT STD_ID FROM STUDENTS;
++--------+
+| STD_ID |
++--------+
+|      1 |
+|      2 |
+|      3 |
+|      4 |
+|      5 |
++--------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT NAME FROM STUDENTS;
++-------+
+| NAME  |
++-------+
+| AMIT  |
+| SNEHA |
+| RAHUL |
+| PRIYA |
+| KARAN |
++-------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT AGE,GENDER FROM STUDENTS;
++------+--------+
+| AGE  | GENDER |
++------+--------+
+|   20 | MALE   |
+|   19 | FEMALE |
+|   11 | MALE   |
+|   12 | FEMALE |
+|   20 | MALE   |
++------+--------+
+5 rows in set (0.004 sec)
+
+mysql> SELECT *FROM STUDENTS;
++--------+-------+------+--------+
+| STD_ID | NAME  | AGE  | GENDER |
++--------+-------+------+--------+
+|      1 | AMIT  |   20 | MALE   |
+|      2 | SNEHA |   19 | FEMALE |
+|      3 | RAHUL |   11 | MALE   |
+|      4 | PRIYA |   12 | FEMALE |
+|      5 | KARAN |   20 | MALE   |
++--------+-------+------+--------+
+5 rows in set (0.005 sec)
+
+mysql> CREATE TABLE COURSES
+    -> (
+    -> CID INT NOT NULL,
+    -> CNAME VARCHAR(20),
+    -> DURATION VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (11.644 sec)
+
+mysql> INSERT INTO COURSES VALUES(1,'AMIT','1 MONTH');
+Query OK, 1 row affected (4.930 sec)
+
+mysql> INSERT INTO COURSES VALUES(2,'SNEHA',2 MONTH');
+    '>
+    '> INSERT INTO COURSES VALUES(2,'SNEHA','2 MONTH');
+    '>
+    '>
+    '>
+    '>
+    '>
+    '> INSERT INTO COURSES VALUES(2,'SNEHA','2 MONTH');^C
+mysql> INSERT INTO COURSES VALUES(2,'SNEHA','2 MONTH');
+Query OK, 1 row affected (7.141 sec)
+
+mysql> INSERT INTO COURSES VALUES(3,'PRADIP','1 MONTH');
+Query OK, 1 row affected (5.468 sec)
+
+mysql> INSERT INTO COURSES VALUES(4,'SWEETY','5 MONTH');
+Query OK, 1 row affected (4.038 sec)
+
+mysql> INSERT INTO COURSES VALUES(5,'SONU','2 MONTH');
+Query OK, 1 row affected (5.030 sec)
+
+mysql> SELECT CID FROM COURSES;
++-----+
+| CID |
++-----+
+|   1 |
+|   2 |
+|   3 |
+|   4 |
+|   5 |
++-----+
+5 rows in set (0.005 sec)
+
+mysql> SELECT CNAME,DURATION FROM COURSES;
++--------+----------+
+| CNAME  | DURATION |
++--------+----------+
+| AMIT   | 1 MONTH  |
+| SNEHA  | 2 MONTH  |
+| PRADIP | 1 MONTH  |
+| SWEETY | 5 MONTH  |
+| SONU   | 2 MONTH  |
++--------+----------+
+5 rows in set (0.004 sec)
+
+mysql> SELECT * FROM COURSES;
++-----+--------+----------+
+| CID | CNAME  | DURATION |
++-----+--------+----------+
+|   1 | AMIT   | 1 MONTH  |
+|   2 | SNEHA  | 2 MONTH  |
+|   3 | PRADIP | 1 MONTH  |
+|   4 | SWEETY | 5 MONTH  |
+|   5 | SONU   | 2 MONTH  |
++-----+--------+----------+
+5 rows in set (0.004 sec)
+
+mysql> CREATE TABLE TEACHERS
+    -> (
+    -> TID INT NOT NULL,
+    -> NAME VARCHAR(20),
+    -> SUB VARCHAR(3),
+    -> PRIMARY KEY(TID)
+    -> );
+Query OK, 0 rows affected (8.916 sec)
+
+mysql> INSERT INTO TEACHER VALUES(1,'PRIYA','MATH');
+ERROR 1146 (42S02): Table 'college.teacher' doesn't exist
+mysql> INSERT INTO TEACHERS VALUES(1,'PRIYA','SCIENCE');
+ERROR 1406 (22001): Data too long for column 'SUB' at row 1
+mysql> INSERT INTO TEACHERS VALUES(1,'PRIYA','M');
+Query OK, 1 row affected (4.854 sec)
+
+mysql> INSERT INTO TEACHERS VALUES(2,'VISHAL','S');
+Query OK, 1 row affected (5.293 sec)
+
+mysql> INSERT INTO TEACHERS VALUES(3,'PRADIP','C');
+Query OK, 1 row affected (5.070 sec)
+
+mysql> INSERT INTO TEACHERS VALUES(4,'NISHA','A');
+Query OK, 1 row affected (5.022 sec)
+
+mysql> INSERT INTO TEACHERS VALUES(5,'SNEHA','V');
+Query OK, 1 row affected (4.861 sec)
+
+mysql> SELECT TID FROM TEACHERS;
++-----+
+| TID |
++-----+
+|   1 |
+|   2 |
+|   3 |
+|   4 |
+|   5 |
++-----+
+5 rows in set (0.005 sec)
+
+mysql> SELECT CNAME,DURATION FROM TEACHERS;
+ERROR 1054 (42S22): Unknown column 'CNAME' in 'field list'
+mysql> SELECT NAME,SUB FROM TEACHERS;
++--------+------+
+| NAME   | SUB  |
++--------+------+
+| PRIYA  | M    |
+| VISHAL | S    |
+| PRADIP | C    |
+| NISHA  | A    |
+| SNEHA  | V    |
++--------+------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT * FROM TEACHERS;
++-----+--------+------+
+| TID | NAME   | SUB  |
++-----+--------+------+
+|   1 | PRIYA  | M    |
+|   2 | VISHAL | S    |
+|   3 | PRADIP | C    |
+|   4 | NISHA  | A    |
+|   5 | SNEHA  | V    |
++-----+--------+------+
+5 rows in set (0.005 sec)
+
+mysql> CREATE TABLE DEPARTMENTS
+    -> (
+    -> DID INT NOT NULL,
+    -> DEPT_NAME VARCHAR(20),
+    -> LOCATION CHAR,
+    -> PRIMARY KEY(DID)
+    -> );
+Query OK, 0 rows affected (10.080 sec)
+
+mysql> INSERT INTO DEPARTMENTS VALUES(1,'PRIYA','NEWASA');
+ERROR 1406 (22001): Data too long for column 'LOCATION' at row 1
+mysql> INSERT INTO DEPARTMENTS VALUES(1,'PRIYA','N');
+Query OK, 1 row affected (4.884 sec)
+
+mysql> INSERT INTO DEPARTMENTS VALUES(2,'PRITI','T');
+Query OK, 1 row affected (4.951 sec)
+
+mysql> INSERT INTO DEPARTMENTS VALUES(3,'NEHA','D');
+Query OK, 1 row affected (4.108 sec)
+
+mysql> INSERT INTO DEPARTMENTS VALUES(4,'SNHELA','L');
+Query OK, 1 row affected (4.833 sec)
+
+mysql> INSERT INTO DEPARTMENTS VALUES(5,'TINA','M');
+Query OK, 1 row affected (4.485 sec)
+
+mysql> SELECT DID FROM DEPARTMENTS;
++-----+
+| DID |
++-----+
+|   1 |
+|   2 |
+|   3 |
+|   4 |
+|   5 |
++-----+
+5 rows in set (0.005 sec)
+
+mysql> SELECT DEPT_NAME , LOCATION FROM DEPARTMENTS;
++-----------+----------+
+| DEPT_NAME | LOCATION |
++-----------+----------+
+| PRIYA     | N        |
+| PRITI     | T        |
+| NEHA      | D        |
+| SNHELA    | L        |
+| TINA      | M        |
++-----------+----------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT * FROM DEPARTMENTS;
++-----+-----------+----------+
+| DID | DEPT_NAME | LOCATION |
++-----+-----------+----------+
+|   1 | PRIYA     | N        |
+|   2 | PRITI     | T        |
+|   3 | NEHA      | D        |
+|   4 | SNHELA    | L        |
+|   5 | TINA      | M        |
++-----+-----------+----------+
+5 rows in set (0.005 sec)
+
+mysql> CREATE TABLE BOOKS
+    -> (
+    -> BID INT NOT NULL,
+    -> TITLE VARCHAR(20),
+    -> AUTHOR VARCHAR(20),
+    -> PRICE INT,
+    -> PRIMARY KEY(BID)
+    -> );
+Query OK, 0 rows affected (9.019 sec)
+
+mysql> INSERT INTO BOOKS VALUES(1,'THE POWERFUL','JOHN',5000);
+Query OK, 1 row affected (5.646 sec)
+
+mysql> INSERT INTO BOOKS VALUES(2,'THE NOISE',JOLLY',1000);
+    '> ^C
+mysql> INSERT INTO BOOKS VALUES(2,'THE NOISE','JOLLY',10000);
+Query OK, 1 row affected (4.767 sec)
+
+mysql> INSERT INTO BOOKS VALUES(3,'ANABELLA','TURR',40000);
+Query OK, 1 row affected (3.807 sec)
+
+mysql> INSERT INTO BOOKS VALUES(4,'THE RICH','KING',8000);
+Query OK, 1 row affected (5.756 sec)
+
+mysql> INSERT INTO BOOKS VALUES(5,'THE KING','NUORN',67000);
+Query OK, 1 row affected (5.554 sec)
+
+mysql> SELECT BID FROM BOOKS;
++-----+
+| BID |
++-----+
+|   1 |
+|   2 |
+|   3 |
+|   4 |
+|   5 |
++-----+
+5 rows in set (0.004 sec)
+
+mysql> SELECT TITLE,AUTHOR,PRICE FROM BOOKS;
++--------------+--------+-------+
+| TITLE        | AUTHOR | PRICE |
++--------------+--------+-------+
+| THE POWERFUL | JOHN   |  5000 |
+| THE NOISE    | JOLLY  | 10000 |
+| ANABELLA     | TURR   | 40000 |
+| THE RICH     | KING   |  8000 |
+| THE KING     | NUORN  | 67000 |
++--------------+--------+-------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT * FROM BOOKS;
++-----+--------------+--------+-------+
+| BID | TITLE        | AUTHOR | PRICE |
++-----+--------------+--------+-------+
+|   1 | THE POWERFUL | JOHN   |  5000 |
+|   2 | THE NOISE    | JOLLY  | 10000 |
+|   3 | ANABELLA     | TURR   | 40000 |
+|   4 | THE RICH     | KING   |  8000 |
+|   5 | THE KING     | NUORN  | 67000 |
++-----+--------------+--------+-------+
+5 rows in set (0.005 sec)
+
+mysql> CREATE TABLE EMPLOYEES
+    -> (
+    -> EMP_ID INT NOT NULL,
+    -> NAME VARCHAR(20),
+    -> EMAIL VARCHAR(20),
+    -> PHONE INT
+    -> );
+Query OK, 0 rows affected (9.942 sec)
+
+mysql> INSERT INTO EMPLOYEES VALUES(1,'POOJA','POJA12@GMAIL.COM',12303940304);
+ERROR 1264 (22003): Out of range value for column 'PHONE' at row 1
+mysql> INSERT INTO EMPLOYEES VALUES(1,'POOJA','POJA@GMAIL.COM',12345);
+Query OK, 1 row affected (1.762 sec)
+
+mysql> INSERT INTO EMPLOYEES VALUES(2,'PUNAM','PUNAM@GMAIL.COM',3452532);
+Query OK, 1 row affected (6.202 sec)
+
+mysql> INSERT INTO EMPLOYEES VALUES(3,'VAISH','VAISH@GMAIL.COM',482932);
+Query OK, 1 row affected (5.602 sec)
+
+mysql> INSERT INTO EMPLOYEES VALUES(4,'NISHA','NISHA@GMAIL.COM',482032);
+Query OK, 1 row affected (5.033 sec)
+
+mysql> INSERT INTO EMPLOYEES VALUES(5,'PRITI',PRITI@GMAIL.COM',345789);
+    '> ^C
+mysql> INSERT INTO EMPLOYEES VALUES(5,'PRITI','P@GMAIL.COM',234567);
+Query OK, 1 row affected (1.718 sec)
+
+mysql> SELECT EMP_ID FROM EMPLOYEES;
++--------+
+| EMP_ID |
++--------+
+|      1 |
+|      2 |
+|      3 |
+|      4 |
+|      5 |
++--------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT NAME,EMAIL,PHONE FROM EMPLOYEES;
++-------+-----------------+---------+
+| NAME  | EMAIL           | PHONE   |
++-------+-----------------+---------+
+| POOJA | POJA@GMAIL.COM  |   12345 |
+| PUNAM | PUNAM@GMAIL.COM | 3452532 |
+| VAISH | VAISH@GMAIL.COM |  482932 |
+| NISHA | NISHA@GMAIL.COM |  482032 |
+| PRITI | P@GMAIL.COM     |  234567 |
++-------+-----------------+---------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT * FROM EMPLOYEES;
++--------+-------+-----------------+---------+
+| EMP_ID | NAME  | EMAIL           | PHONE   |
++--------+-------+-----------------+---------+
+|      1 | POOJA | POJA@GMAIL.COM  |   12345 |
+|      2 | PUNAM | PUNAM@GMAIL.COM | 3452532 |
+|      3 | VAISH | VAISH@GMAIL.COM |  482932 |
+|      4 | NISHA | NISHA@GMAIL.COM |  482032 |
+|      5 | PRITI | P@GMAIL.COM     |  234567 |
++--------+-------+-----------------+---------+
+5 rows in set (0.005 sec)
+
+mysql> CREATE TABLE CUSTOMERS
+    -> (
+    -> CID INT NOT NULL,
+    -> NAME VARCHAR(20),
+    -> PRODUCT VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (11.871 sec)
+
+mysql> INSERT INTO CUSTOMER VALUES(1,'PRITAM','SUGAR')
+    -> ;
+ERROR 1146 (42S02): Table 'college.customer' doesn't exist
+mysql> INSERT INTO CUSTOMER VALUES(1,'PRITAM','SUGAR');
+ERROR 1146 (42S02): Table 'college.customer' doesn't exist
+mysql> INSERT INTO CUSTOMERS VALUES(1,'PRITAM','SUGAR');
+Query OK, 1 row affected (1.809 sec)
+
+mysql> INSERT INTO CUSTOMERS VALUES(2,'PRIYA','NOODLES');
+Query OK, 1 row affected (5.083 sec)
+
+mysql> INSERT INTO CUSTOMERS VALUES(3,'ATUL','TEA');
+Query OK, 1 row affected (4.982 sec)
+
+mysql> INSERT INTO CUSTOMERS VALUES(4,'ADIL','COFFEE');
+Query OK, 1 row affected (5.969 sec)
+
+mysql> INSERT INTO CUSTOMERS VALUES(5,'ADITI','MAGGIE');
+Query OK, 1 row affected (5.584 sec)
+
+mysql> SELECT * FROM CUSTOMERS;
++-----+--------+---------+
+| CID | NAME   | PRODUCT |
++-----+--------+---------+
+|   1 | PRITAM | SUGAR   |
+|   2 | PRIYA  | NOODLES |
+|   3 | ATUL   | TEA     |
+|   4 | ADIL   | COFFEE  |
+|   5 | ADITI  | MAGGIE  |
++-----+--------+---------+
+5 rows in set (0.005 sec)
+
+mysql> CREATE TABLE ORDERS
+    -> (
+    -> OID INT NOT NULL,
+    -> DATE INT,
+    -> TOTAL_AMOUNT INT
+    -> );
+Query OK, 0 rows affected (8.983 sec)
+
+mysql> INSERT INTO ORDERS VALUES(1,31,19000);
+Query OK, 1 row affected (5.572 sec)
+
+mysql> INSERT INTO ORDERS VALUES(2,12,39000);
+Query OK, 1 row affected (2.971 sec)
+
+mysql> INSERT INTO ORDERS VALUES(3,04,29000);
+Query OK, 1 row affected (1.898 sec)
+
+mysql> INSERT INTO ORDERS VALUES(4,15,390300);
+Query OK, 1 row affected (2.843 sec)
+
+mysql> INSERT INTO ORDERS VALUES(5,23,78000);
+Query OK, 1 row affected (4.496 sec)
+
+mysql> SELECT * FROM ORDERS;
++-----+------+--------------+
+| OID | DATE | TOTAL_AMOUNT |
++-----+------+--------------+
+|   1 |   31 |        19000 |
+|   2 |   12 |        39000 |
+|   3 |    4 |        29000 |
+|   4 |   15 |       390300 |
+|   5 |   23 |        78000 |
++-----+------+--------------+
+5 rows in set (0.004 sec)
+
+mysql> CREATE TABLE PRODUCTS
+    -> (
+    -> P_ID INT NOT NULL,
+    -> P_NAME VARCHAR(20),
+    -> P_PRICE VARCHAR(20),
+    -> STOCK INT
+    -> );
+Query OK, 0 rows affected (9.380 sec)
+
+mysql> INSERT INTO PRODUCTS VALUES(1,'OM',30000,45);
+Query OK, 1 row affected (5.301 sec)
+
+mysql> INSERT INTO PRODUCTS VALUES(2,'AYAN',40000,20);
+Query OK, 1 row affected (5.563 sec)
+
+mysql> INSERT INTO PRODUCTS VALUES(3,'HARI',60000,40);
+Query OK, 1 row affected (5.546 sec)
+
+mysql> INSERT INTO PRODUCTS VALUES(4,'PRIYA',70000,30);
+Query OK, 1 row affected (2.844 sec)
+
+mysql> INSERT INTO PRODUCTS VALUES(5,'ZARA',69000,30);
+Query OK, 1 row affected (4.478 sec)
+
+mysql> SELECT * FROM PRODUCTS;
++------+--------+---------+-------+
+| P_ID | P_NAME | P_PRICE | STOCK |
++------+--------+---------+-------+
+|    1 | OM     | 30000   |    45 |
+|    2 | AYAN   | 40000   |    20 |
+|    3 | HARI   | 60000   |    40 |
+|    4 | PRIYA  | 70000   |    30 |
+|    5 | ZARA   | 69000   |    30 |
++------+--------+---------+-------+
+5 rows in set (0.005 sec)
+
+mysql> CREATE TABLE PAYMENTS
+    -> (
+    -> PAY_ID INT NOT NULL,
+    -> AMOUNT INT,
+    -> PAY_DATE VARCHAR(20),
+    -> METHOD VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (9.443 sec)
+
+mysql> INSERT INTO PAYMENTS VALUES(1,20000,'31-8-2004','CASH');
+Query OK, 1 row affected (5.358 sec)
+
+mysql> INSERT INTO PAYMENTS VALUES(2,30000,'28-4-2005','ONLINE');
+Query OK, 1 row affected (5.552 sec)
+
+mysql> INSERT INTO PAYMENTS VALUES(3,40000,'14-5-2008','ONLINE');
+Query OK, 1 row affected (4.804 sec)
+
+mysql> INSERT INTO PAYMENTS VALUES(4,500000,'28-07-2001','CASH');
+Query OK, 1 row affected (4.527 sec)
+
+mysql> INSERT INTO PAYMENSTS VALUES(5,70000,'31-06-2004','ONILE');
+ERROR 1146 (42S02): Table 'college.paymensts' doesn't exist
+mysql> INSERT INTO PAYMENTS VALUES(5,700000,'29-8-2003','CASH');
+Query OK, 1 row affected (2.259 sec)
+
+mysql> SELECT * FROM PAYMENTS;
++--------+--------+------------+--------+
+| PAY_ID | AMOUNT | PAY_DATE   | METHOD |
++--------+--------+------------+--------+
+|      1 |  20000 | 31-8-2004  | CASH   |
+|      2 |  30000 | 28-4-2005  | ONLINE |
+|      3 |  40000 | 14-5-2008  | ONLINE |
+|      4 | 500000 | 28-07-2001 | CASH   |
+|      5 | 700000 | 29-8-2003  | CASH   |
++--------+--------+------------+--------+
+5 rows in set (0.005 sec)
+
+mysql>
