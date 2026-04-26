@@ -1,0 +1,893 @@
+Day 2 SQL Practice 
+🔹 Topic: SELECT + WHERE
+
+Use your existing tables (STUDENTS, COURSES, EMPLOYEES, etc.)
+
+
+  ----------------------------------------------------------------------------------
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 24
+Server version: 9.7.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use college;
+Database changed
+mysql> select * from students;
++--------+-------+------+--------+
+| STD_ID | NAME  | AGE  | GENDER |
++--------+-------+------+--------+
+|      1 | AMIT  |   20 | MALE   |
+|      2 | SNEHA |   19 | FEMALE |
+|      3 | RAHUL |   11 | MALE   |
+|      4 | PRIYA |   12 | FEMALE |
+|      5 | KARAN |   20 | MALE   |
++--------+-------+------+--------+
+5 rows in set (0.007 sec)
+
+mysql> select * from courses;
++-----+--------+----------+
+| CID | CNAME  | DURATION |
++-----+--------+----------+
+|   1 | AMIT   | 1 MONTH  |
+|   2 | SNEHA  | 2 MONTH  |
+|   3 | PRADIP | 1 MONTH  |
+|   4 | SWEETY | 5 MONTH  |
+|   5 | SONU   | 2 MONTH  |
++-----+--------+----------+
+5 rows in set (0.007 sec)
+
+mysql> select * from teachers;
++-----+--------+------+
+| TID | NAME   | SUB  |
++-----+--------+------+
+|   1 | PRIYA  | M    |
+|   2 | VISHAL | S    |
+|   3 | PRADIP | C    |
+|   4 | NISHA  | A    |
+|   5 | SNEHA  | V    |
++-----+--------+------+
+5 rows in set (0.006 sec)
+
+mysql> select * from departments;
++-----+-----------+----------+
+| DID | DEPT_NAME | LOCATION |
++-----+-----------+----------+
+|   1 | PRIYA     | N        |
+|   2 | PRITI     | T        |
+|   3 | NEHA      | D        |
+|   4 | SNHELA    | L        |
+|   5 | TINA      | M        |
++-----+-----------+----------+
+5 rows in set (0.007 sec)
+
+mysql> select * books
+    -> ^C
+mysql> select * from books;
++-----+--------------+--------+-------+
+| BID | TITLE        | AUTHOR | PRICE |
++-----+--------------+--------+-------+
+|   1 | THE POWERFUL | JOHN   |  5000 |
+|   2 | THE NOISE    | JOLLY  | 10000 |
+|   3 | ANABELLA     | TURR   | 40000 |
+|   4 | THE RICH     | KING   |  8000 |
+|   5 | THE KING     | NUORN  | 67000 |
++-----+--------------+--------+-------+
+5 rows in set (0.007 sec)
+
+mysql> select * from employees;
++--------+-------+-----------------+---------+
+| EMP_ID | NAME  | EMAIL           | PHONE   |
++--------+-------+-----------------+---------+
+|      1 | POOJA | POJA@GMAIL.COM  |   12345 |
+|      2 | PUNAM | PUNAM@GMAIL.COM | 3452532 |
+|      3 | VAISH | VAISH@GMAIL.COM |  482932 |
+|      4 | NISHA | NISHA@GMAIL.COM |  482032 |
+|      5 | PRITI | P@GMAIL.COM     |  234567 |
++--------+-------+-----------------+---------+
+5 rows in set (0.006 sec)
+
+mysql> select * from customers;
++-----+--------+---------+
+| CID | NAME   | PRODUCT |
++-----+--------+---------+
+|   1 | PRITAM | SUGAR   |
+|   2 | PRIYA  | NOODLES |
+|   3 | ATUL   | TEA     |
+|   4 | ADIL   | COFFEE  |
+|   5 | ADITI  | MAGGIE  |
++-----+--------+---------+
+5 rows in set (0.006 sec)
+
+mysql> select * from orders;
++-----+------+--------------+
+| OID | DATE | TOTAL_AMOUNT |
++-----+------+--------------+
+|   1 |   31 |        19000 |
+|   2 |   12 |        39000 |
+|   3 |    4 |        29000 |
+|   4 |   15 |       390300 |
+|   5 |   23 |        78000 |
++-----+------+--------------+
+5 rows in set (0.006 sec)
+
+mysql> select * from orders;
++-----+------+--------------+
+| OID | DATE | TOTAL_AMOUNT |
++-----+------+--------------+
+|   1 |   31 |        19000 |
+|   2 |   12 |        39000 |
+|   3 |    4 |        29000 |
+|   4 |   15 |       390300 |
+|   5 |   23 |        78000 |
++-----+------+--------------+
+5 rows in set (0.005 sec)
+
+mysql> select * from products;
++------+--------+---------+-------+
+| P_ID | P_NAME | P_PRICE | STOCK |
++------+--------+---------+-------+
+|    1 | OM     | 30000   |    45 |
+|    2 | AYAN   | 40000   |    20 |
+|    3 | HARI   | 60000   |    40 |
+|    4 | PRIYA  | 70000   |    30 |
+|    5 | ZARA   | 69000   |    30 |
++------+--------+---------+-------+
+5 rows in set (0.006 sec)
+
+mysql> select * from payments;
++--------+--------+------------+--------+
+| PAY_ID | AMOUNT | PAY_DATE   | METHOD |
++--------+--------+------------+--------+
+|      1 |  20000 | 31-8-2004  | CASH   |
+|      2 |  30000 | 28-4-2005  | ONLINE |
+|      3 |  40000 | 14-5-2008  | ONLINE |
+|      4 | 500000 | 28-07-2001 | CASH   |
+|      5 | 700000 | 29-8-2003  | CASH   |
++--------+--------+------------+--------+
+5 rows in set (0.006 sec)
+
+mysql> select * from students;
++--------+-------+------+--------+
+| STD_ID | NAME  | AGE  | GENDER |
++--------+-------+------+--------+
+|      1 | AMIT  |   20 | MALE   |
+|      2 | SNEHA |   19 | FEMALE |
+|      3 | RAHUL |   11 | MALE   |
+|      4 | PRIYA |   12 | FEMALE |
+|      5 | KARAN |   20 | MALE   |
++--------+-------+------+--------+
+5 rows in set (0.008 sec)
+
+mysql> WHERE AGE > 18 ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE AGE > 18' at line 1
+mysql> SELECT * FROM STUDENTS WHERE AGE > 18;
++--------+-------+------+--------+
+| STD_ID | NAME  | AGE  | GENDER |
++--------+-------+------+--------+
+|      1 | AMIT  |   20 | MALE   |
+|      2 | SNEHA |   19 | FEMALE |
+|      5 | KARAN |   20 | MALE   |
++--------+-------+------+--------+
+3 rows in set (0.049 sec)
+
+mysql> SELECT AGE FROM STUDENTS WHERE AGE > 18;
++------+
+| AGE  |
++------+
+|   20 |
+|   19 |
+|   20 |
++------+
+3 rows in set (0.005 sec)
+
+mysql> SELECT * FROM STUDENTS WHERE GENDER == 'MALE';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== 'MALE'' at line 1
+mysql> SELECT * FROM STUDENTS WHERE GENDER = 'MALE' ;
++--------+-------+------+--------+
+| STD_ID | NAME  | AGE  | GENDER |
++--------+-------+------+--------+
+|      1 | AMIT  |   20 | MALE   |
+|      3 | RAHUL |   11 | MALE   |
+|      5 | KARAN |   20 | MALE   |
++--------+-------+------+--------+
+3 rows in set (0.014 sec)
+
+mysql> -- 3.SHOW STUDENTS WHOSE AGE IS LESS THAN 20.
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> SELECT
+    -> ^C
+mysql> SELECT * FROM STUDENTS WHERE AGE < 20 ;
++--------+-------+------+--------+
+| STD_ID | NAME  | AGE  | GENDER |
++--------+-------+------+--------+
+|      2 | SNEHA |   19 | FEMALE |
+|      3 | RAHUL |   11 | MALE   |
+|      4 | PRIYA |   12 | FEMALE |
++--------+-------+------+--------+
+3 rows in set (0.005 sec)
+
+mysql> --4,SHOE STUDENTS WHOSE NAME IS 'AMIT'.
+    ->
+    -> ^C
+mysql> SELECT * FROM STUDENTS WHERE NAME = 'AMIT;
+    '>
+    '>
+    '>
+    '>
+    '> ^C
+mysql> SELECT * FROM STUDENTS WHERE NAME = 'AMIT';
++--------+------+------+--------+
+| STD_ID | NAME | AGE  | GENDER |
++--------+------+------+--------+
+|      1 | AMIT |   20 | MALE   |
++--------+------+------+--------+
+1 row in set (0.005 sec)
+
+mysql> --SHOW STUDENTS WHOSE AGE IS BETWEEN 18 AND 21
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--SHOW STUDENTS WHOSE AGE IS BETWEEN 18 AND 21' at line 1
+mysql> -- SHOW;
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> --S;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--S' at line 1
+mysql> -- SHOW STUDENTS WHOSE AGE IS BETWEEN 18 AND 21 ;
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> SELECT * FROM STUDENTS WHERE AGE > 18 &&  AGE < 21 ;
++--------+-------+------+--------+
+| STD_ID | NAME  | AGE  | GENDER |
++--------+-------+------+--------+
+|      1 | AMIT  |   20 | MALE   |
+|      2 | SNEHA |   19 | FEMALE |
+|      5 | KARAN |   20 | MALE   |
++--------+-------+------+--------+
+3 rows in set, 1 warning (0.016 sec)
+
+mysql> -- COURSES ......!!!
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> SELECT * FROM COURSES;
++-----+--------+----------+
+| CID | CNAME  | DURATION |
++-----+--------+----------+
+|   1 | AMIT   | 1 MONTH  |
+|   2 | SNEHA  | 2 MONTH  |
+|   3 | PRADIP | 1 MONTH  |
+|   4 | SWEETY | 5 MONTH  |
+|   5 | SONU   | 2 MONTH  |
++-----+--------+----------+
+5 rows in set (0.006 sec)
+
+mysql> SELECT * FROM  COURSES  WHERE DURATION = '2 MONTH' ;
++-----+-------+----------+
+| CID | CNAME | DURATION |
++-----+-------+----------+
+|   2 | SNEHA | 2 MONTH  |
+|   5 | SONU  | 2 MONTH  |
++-----+-------+----------+
+2 rows in set (0.005 sec)
+
+mysql> SELECT * FROM COURSES WHERE DURATION  = ' 1 MONTH ' ;
+Empty set (0.005 sec)
+
+mysql> SELECT * FROM COURSES WHERE DURATION ='5 MONTH';
++-----+--------+----------+
+| CID | CNAME  | DURATION |
++-----+--------+----------+
+|   4 | SWEETY | 5 MONTH  |
++-----+--------+----------+
+1 row in set (0.005 sec)
+
+mysql> SELECT * FROM COURSES WHERE DURATION = '1 MONTH';
++-----+--------+----------+
+| CID | CNAME  | DURATION |
++-----+--------+----------+
+|   1 | AMIT   | 1 MONTH  |
+|   3 | PRADIP | 1 MONTH  |
++-----+--------+----------+
+2 rows in set (0.004 sec)
+
+mysql> -- 7.SHOW COURSES WHERE NAME IS 'SNEHA'.
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> SELECT * FROM COURSES WHERE CNAME ='SNEHA';
++-----+-------+----------+
+| CID | CNAME | DURATION |
++-----+-------+----------+
+|   2 | SNEHA | 2 MONTH  |
++-----+-------+----------+
+1 row in set (0.005 sec)
+
+mysql> -- SHOW COURSES WHERE DURATION IS NOT ' 1 MONTH'
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> SELECT * FROM COURSES WHERE DURATION =! '1 MONTH' ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=! '1 MONTH'' at line 1
+mysql> SELECT * FROM COURSES WHERE DURATION
+    -> 1^C
+mysql> SELECT * FROM COURSES WHERE DURATION ! '1 MONTH' ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! '1 MONTH'' at line 1
+mysql> SELECT * FROM COURSES WHERE DURATION != '1 MONTH' ;
++-----+--------+----------+
+| CID | CNAME  | DURATION |
++-----+--------+----------+
+|   2 | SNEHA  | 2 MONTH  |
+|   4 | SWEETY | 5 MONTH  |
+|   5 | SONU   | 2 MONTH  |
++-----+--------+----------+
+3 rows in set (0.005 sec)
+
+mysql> SELECT * FROM COURSES WHERE DURATION  != '2 MONTH' ;
++-----+--------+----------+
+| CID | CNAME  | DURATION |
++-----+--------+----------+
+|   1 | AMIT   | 1 MONTH  |
+|   3 | PRADIP | 1 MONTH  |
+|   4 | SWEETY | 5 MONTH  |
++-----+--------+----------+
+3 rows in set (0.005 sec)
+
+mysql> SELECT * FROM COURSES WHERE DURATION != '5 MONTH' ;
++-----+--------+----------+
+| CID | CNAME  | DURATION |
++-----+--------+----------+
+|   1 | AMIT   | 1 MONTH  |
+|   2 | SNEHA  | 2 MONTH  |
+|   3 | PRADIP | 1 MONTH  |
+|   5 | SONU   | 2 MONTH  |
++-----+--------+----------+
+4 rows in set (0.004 sec)
+
+mysql> -- SHOW TEACHER WHOSE NAME STARTS WITH 'P'
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> -- TEACHERES ....!!
+Query OK, 0 rows affected (0.004 sec)
+
+mysql> SELECT * FROM  TEACHERES;
+ERROR 1146 (42S02): Table 'college.teacheres' doesn't exist
+mysql> SELECT * FROM TEACHERS ;
++-----+--------+------+
+| TID | NAME   | SUB  |
++-----+--------+------+
+|   1 | PRIYA  | M    |
+|   2 | VISHAL | S    |
+|   3 | PRADIP | C    |
+|   4 | NISHA  | A    |
+|   5 | SNEHA  | V    |
++-----+--------+------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT * FFROM TEACHERES WHERE NAME = 'P' ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FFROM TEACHERES WHERE NAME = 'P'' at line 1
+mysql> SELECT * FROM TEACHERS WHERE LIKE 'P';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE 'P'' at line 1
+mysql> SELECT * FROM TEACHERES WHERE NAME LIKE 'P%' ;
+ERROR 1146 (42S02): Table 'college.teacheres' doesn't exist
+mysql> SELECT * FROM TEACHERS WHERE NAME LIKE 'P%'  ;
++-----+--------+------+
+| TID | NAME   | SUB  |
++-----+--------+------+
+|   1 | PRIYA  | M    |
+|   3 | PRADIP | C    |
++-----+--------+------+
+2 rows in set (0.005 sec)
+
+mysql> SELECT  * FROM TEACHERS WHERE SUB = 'M' ;
++-----+-------+------+
+| TID | NAME  | SUB  |
++-----+-------+------+
+|   1 | PRIYA | M    |
++-----+-------+------+
+1 row in set (0.005 sec)
+
+mysql> -- DEPARTMENTS ....!!!
+Query OK, 0 rows affected (0.004 sec)
+
+mysql>  SELECT * FROM  DEPARTMENTS ;
++-----+-----------+----------+
+| DID | DEPT_NAME | LOCATION |
++-----+-----------+----------+
+|   1 | PRIYA     | N        |
+|   2 | PRITI     | T        |
+|   3 | NEHA      | D        |
+|   4 | SNHELA    | L        |
+|   5 | TINA      | M        |
++-----+-----------+----------+
+5 rows in set (0.006 sec)
+
+mysql> SELECT * FROM DEPARTMENTS WHERE LOCATION = 'N' ;
++-----+-----------+----------+
+| DID | DEPT_NAME | LOCATION |
++-----+-----------+----------+
+|   1 | PRIYA     | N        |
++-----+-----------+----------+
+1 row in set (0.006 sec)
+
+mysql> SELECT * FROM DEPARTMENTS WHERE LOCATION LIKE 'M%' ;
++-----+-----------+----------+
+| DID | DEPT_NAME | LOCATION |
++-----+-----------+----------+
+|   5 | TINA      | M        |
++-----+-----------+----------+
+1 row in set (0.006 sec)
+
+mysql> -- SHOW DEPARTMENTS WHERE NAME IS NOT 'TINA'
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> SELECT * FROM DEPARTMENT WHERE LOCATION NOT LIKE 'TINA' ;
+ERROR 1146 (42S02): Table 'college.department' doesn't exist
+mysql> SELECT * FROM DEPARTMENTS WHERE LOCATION NOT LIKE 'TINA' ;
++-----+-----------+----------+
+| DID | DEPT_NAME | LOCATION |
++-----+-----------+----------+
+|   1 | PRIYA     | N        |
+|   2 | PRITI     | T        |
+|   3 | NEHA      | D        |
+|   4 | SNHELA    | L        |
+|   5 | TINA      | M        |
++-----+-----------+----------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT * FROM DEPARTMENTS WHERE DID NOT LIKE 4 ;
++-----+-----------+----------+
+| DID | DEPT_NAME | LOCATION |
++-----+-----------+----------+
+|   1 | PRIYA     | N        |
+|   2 | PRITI     | T        |
+|   3 | NEHA      | D        |
+|   5 | TINA      | M        |
++-----+-----------+----------+
+4 rows in set (0.005 sec)
+
+mysql> SELECT * FROM DEPARTMENTS WHERE DEPT_NAME LIKE 'NEHA' ;
++-----+-----------+----------+
+| DID | DEPT_NAME | LOCATION |
++-----+-----------+----------+
+|   3 | NEHA      | D        |
++-----+-----------+----------+
+1 row in set (0.005 sec)
+
+mysql> SELECT * FROM DEPARTMENTS WHERE DEPT_NAME NOT LIKE 'PRIYA' ;
++-----+-----------+----------+
+| DID | DEPT_NAME | LOCATION |
++-----+-----------+----------+
+|   2 | PRITI     | T        |
+|   3 | NEHA      | D        |
+|   4 | SNHELA    | L        |
+|   5 | TINA      | M        |
++-----+-----------+----------+
+4 rows in set (0.005 sec)
+
+mysql> -- BOOKS ........!!!
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> SELECT * FROM BOOKS ;
++-----+--------------+--------+-------+
+| BID | TITLE        | AUTHOR | PRICE |
++-----+--------------+--------+-------+
+|   1 | THE POWERFUL | JOHN   |  5000 |
+|   2 | THE NOISE    | JOLLY  | 10000 |
+|   3 | ANABELLA     | TURR   | 40000 |
+|   4 | THE RICH     | KING   |  8000 |
+|   5 | THE KING     | NUORN  | 67000 |
++-----+--------------+--------+-------+
+5 rows in set (0.005 sec)
+
+mysql> -- SHOW BOOKS WITH PRICE GREATER THAN 10000
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> SELECT * FROM BOOKS WHERE PRICE > 1000000 ;
+Empty set (0.008 sec)
+
+mysql> SELECT * FROM BOOKS WHERE PRICE > 4000 ;
++-----+--------------+--------+-------+
+| BID | TITLE        | AUTHOR | PRICE |
++-----+--------------+--------+-------+
+|   1 | THE POWERFUL | JOHN   |  5000 |
+|   2 | THE NOISE    | JOLLY  | 10000 |
+|   3 | ANABELLA     | TURR   | 40000 |
+|   4 | THE RICH     | KING   |  8000 |
+|   5 | THE KING     | NUORN  | 67000 |
++-----+--------------+--------+-------+
+5 rows in set (0.006 sec)
+
+mysql> SELECT  * FROM BOOKS WHERE PRICE > 50000 ;
++-----+----------+--------+-------+
+| BID | TITLE    | AUTHOR | PRICE |
++-----+----------+--------+-------+
+|   5 | THE KING | NUORN  | 67000 |
++-----+----------+--------+-------+
+1 row in set (0.006 sec)
+
+mysql> SELECT * FROM BOOKS WHERE PRICE > 8000 ;
++-----+-----------+--------+-------+
+| BID | TITLE     | AUTHOR | PRICE |
++-----+-----------+--------+-------+
+|   2 | THE NOISE | JOLLY  | 10000 |
+|   3 | ANABELLA  | TURR   | 40000 |
+|   5 | THE KING  | NUORN  | 67000 |
++-----+-----------+--------+-------+
+3 rows in set (0.005 sec)
+
+mysql> SELECT * FROM BOOKS WHERE PRICE > 50000 ;
++-----+----------+--------+-------+
+| BID | TITLE    | AUTHOR | PRICE |
++-----+----------+--------+-------+
+|   5 | THE KING | NUORN  | 67000 |
++-----+----------+--------+-------+
+1 row in set (0.005 sec)
+
+mysql> SELECT * FROM BOOKS WHERE PRICE LIKE 'JOHN' ;
+Empty set (0.005 sec)
+
+mysql> SELECT * FROM BOOKS WHERE AUTHOR LIKE 'JOHN' ;
++-----+--------------+--------+-------+
+| BID | TITLE        | AUTHOR | PRICE |
++-----+--------------+--------+-------+
+|   1 | THE POWERFUL | JOHN   |  5000 |
++-----+--------------+--------+-------+
+1 row in set (0.005 sec)
+
+mysql> SELECT * FROM BOOKS WHERE TITLE LIKE 'THE' ;
+Empty set (0.005 sec)
+
+mysql> SELECT * FROM BOOKS WHERE TITLE LIKE 'THE POWERFUL' ;
++-----+--------------+--------+-------+
+| BID | TITLE        | AUTHOR | PRICE |
++-----+--------------+--------+-------+
+|   1 | THE POWERFUL | JOHN   |  5000 |
++-----+--------------+--------+-------+
+1 row in set (0.005 sec)
+
+mysql> SELECT * FROM BOOKS WHERE TITLE LIKE 'THE RICH' , 'THE KING' ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', 'THE KING'' at line 1
+mysql> SELECT * FROM BOOKS WHERE TITLE LIKE 'THE RICH' ;
++-----+----------+--------+-------+
+| BID | TITLE    | AUTHOR | PRICE |
++-----+----------+--------+-------+
+|   4 | THE RICH | KING   |  8000 |
++-----+----------+--------+-------+
+1 row in set (0.005 sec)
+
+mysql> SELECT *  FROM BOOKS WHERE TITLE LIKE 'THE KING' ;
++-----+----------+--------+-------+
+| BID | TITLE    | AUTHOR | PRICE |
++-----+----------+--------+-------+
+|   5 | THE KING | NUORN  | 67000 |
++-----+----------+--------+-------+
+1 row in set (0.006 sec)
+
+mysql> SELECT * FROM BOOKS WHERE TITLE LIKE 'THE NOISE' ;
++-----+-----------+--------+-------+
+| BID | TITLE     | AUTHOR | PRICE |
++-----+-----------+--------+-------+
+|   2 | THE NOISE | JOLLY  | 10000 |
++-----+-----------+--------+-------+
+1 row in set (0.005 sec)
+
+mysql> -- EMPLOYEES ......!!!
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> SELECT * FROM EMPLOYEES ;
++--------+-------+-----------------+---------+
+| EMP_ID | NAME  | EMAIL           | PHONE   |
++--------+-------+-----------------+---------+
+|      1 | POOJA | POJA@GMAIL.COM  |   12345 |
+|      2 | PUNAM | PUNAM@GMAIL.COM | 3452532 |
+|      3 | VAISH | VAISH@GMAIL.COM |  482932 |
+|      4 | NISHA | NISHA@GMAIL.COM |  482032 |
+|      5 | PRITI | P@GMAIL.COM     |  234567 |
++--------+-------+-----------------+---------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT * FROM EMPLOYEES WHERE NAME LIKE 'P%' ;
++--------+-------+-----------------+---------+
+| EMP_ID | NAME  | EMAIL           | PHONE   |
++--------+-------+-----------------+---------+
+|      1 | POOJA | POJA@GMAIL.COM  |   12345 |
+|      2 | PUNAM | PUNAM@GMAIL.COM | 3452532 |
+|      5 | PRITI | P@GMAIL.COM     |  234567 |
++--------+-------+-----------------+---------+
+3 rows in set (0.008 sec)
+
+mysql> SELECT * FROM EMPLOYEES WHERE NAME LIKE 'N%' ;
++--------+-------+-----------------+--------+
+| EMP_ID | NAME  | EMAIL           | PHONE  |
++--------+-------+-----------------+--------+
+|      4 | NISHA | NISHA@GMAIL.COM | 482032 |
++--------+-------+-----------------+--------+
+1 row in set (0.005 sec)
+
+mysql> SELECT * FROM  EMPLOYEES WHERE NAME LIKE 'PUNAM' ;
++--------+-------+-----------------+---------+
+| EMP_ID | NAME  | EMAIL           | PHONE   |
++--------+-------+-----------------+---------+
+|      2 | PUNAM | PUNAM@GMAIL.COM | 3452532 |
++--------+-------+-----------------+---------+
+1 row in set (0.005 sec)
+
+mysql>
+mysql> SELECT * FROM EMPLOYEES WHERE EMAIL LIKE 'POJA@GMAIL.COM' ;
++--------+-------+----------------+-------+
+| EMP_ID | NAME  | EMAIL          | PHONE |
++--------+-------+----------------+-------+
+|      1 | POOJA | POJA@GMAIL.COM | 12345 |
++--------+-------+----------------+-------+
+1 row in set (0.005 sec)
+
+mysql> SELECT * FROM EMPLOYEES WHERE EMP_ID < 6 ;
++--------+-------+-----------------+---------+
+| EMP_ID | NAME  | EMAIL           | PHONE   |
++--------+-------+-----------------+---------+
+|      1 | POOJA | POJA@GMAIL.COM  |   12345 |
+|      2 | PUNAM | PUNAM@GMAIL.COM | 3452532 |
+|      3 | VAISH | VAISH@GMAIL.COM |  482932 |
+|      4 | NISHA | NISHA@GMAIL.COM |  482032 |
+|      5 | PRITI | P@GMAIL.COM     |  234567 |
++--------+-------+-----------------+---------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT * FROM EMPLOYEES WHERE PHONE > 2000 ;
++--------+-------+-----------------+---------+
+| EMP_ID | NAME  | EMAIL           | PHONE   |
++--------+-------+-----------------+---------+
+|      1 | POOJA | POJA@GMAIL.COM  |   12345 |
+|      2 | PUNAM | PUNAM@GMAIL.COM | 3452532 |
+|      3 | VAISH | VAISH@GMAIL.COM |  482932 |
+|      4 | NISHA | NISHA@GMAIL.COM |  482032 |
+|      5 | PRITI | P@GMAIL.COM     |  234567 |
++--------+-------+-----------------+---------+
+5 rows in set (0.005 sec)
+
+mysql> -- CUSTOMERS ...... !!!
+Query OK, 0 rows affected (0.005 sec)
+
+mysql> SELECT * FROM CUSTOMERS ;
++-----+--------+---------+
+| CID | NAME   | PRODUCT |
++-----+--------+---------+
+|   1 | PRITAM | SUGAR   |
+|   2 | PRIYA  | NOODLES |
+|   3 | ATUL   | TEA     |
+|   4 | ADIL   | COFFEE  |
+|   5 | ADITI  | MAGGIE  |
++-----+--------+---------+
+5 rows in set (0.004 sec)
+
+mysql> SELECT * FROM CUSTOMERS WHERE NAME LIKE 'T%' ;
+Empty set (0.004 sec)
+
+mysql> SELECT * FROM CUSTOMERS WHERE NAME LIKE 'P%' ;
++-----+--------+---------+
+| CID | NAME   | PRODUCT |
++-----+--------+---------+
+|   1 | PRITAM | SUGAR   |
+|   2 | PRIYA  | NOODLES |
++-----+--------+---------+
+2 rows in set (0.006 sec)
+
+mysql> SELECT * FROM CUSTOMERS WHERE NAME LIKE 'A%' ;
++-----+-------+---------+
+| CID | NAME  | PRODUCT |
++-----+-------+---------+
+|   3 | ATUL  | TEA     |
+|   4 | ADIL  | COFFEE  |
+|   5 | ADITI | MAGGIE  |
++-----+-------+---------+
+3 rows in set (0.005 sec)
+
+mysql> SELECT * FROM CUSTOMERS WHERE CID > 1 ;
++-----+-------+---------+
+| CID | NAME  | PRODUCT |
++-----+-------+---------+
+|   2 | PRIYA | NOODLES |
+|   3 | ATUL  | TEA     |
+|   4 | ADIL  | COFFEE  |
+|   5 | ADITI | MAGGIE  |
++-----+-------+---------+
+4 rows in set (0.005 sec)
+
+mysql> SELECT * FROM CUSTOMERS WHERE CID <  6 ;
++-----+--------+---------+
+| CID | NAME   | PRODUCT |
++-----+--------+---------+
+|   1 | PRITAM | SUGAR   |
+|   2 | PRIYA  | NOODLES |
+|   3 | ATUL   | TEA     |
+|   4 | ADIL   | COFFEE  |
+|   5 | ADITI  | MAGGIE  |
++-----+--------+---------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT * FROM  CUSTOMERS WHERE NAME LIKE 'A' ;
+Empty set (0.008 sec)
+
+mysql> SELECT * FROM CUSTOMERS WHERE NAME NOT LIKE 'P%' ;
++-----+-------+---------+
+| CID | NAME  | PRODUCT |
++-----+-------+---------+
+|   3 | ATUL  | TEA     |
+|   4 | ADIL  | COFFEE  |
+|   5 | ADITI | MAGGIE  |
++-----+-------+---------+
+3 rows in set (0.005 sec)
+
+mysql> SELECT * FROM CUSTOMERS WHERE PRODUCTS 'E%' ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''E%'' at line 1
+mysql> SELECT * FROM CUSTOMERS WHERE PRODUCTS LIKE 'TEA' ;
+ERROR 1054 (42S22): Unknown column 'PRODUCTS' in 'where clause'
+mysql> SELECT * FROM CUSTOMERS WHERE PRODUCT LIKE 'TEA' ;
++-----+------+---------+
+| CID | NAME | PRODUCT |
++-----+------+---------+
+|   3 | ATUL | TEA     |
++-----+------+---------+
+1 row in set (0.005 sec)
+
+mysql> -- PRODUCTS....!!!
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> SELECT * FROM PRODUCTS ;
++------+--------+---------+-------+
+| P_ID | P_NAME | P_PRICE | STOCK |
++------+--------+---------+-------+
+|    1 | OM     | 30000   |    45 |
+|    2 | AYAN   | 40000   |    20 |
+|    3 | HARI   | 60000   |    40 |
+|    4 | PRIYA  | 70000   |    30 |
+|    5 | ZARA   | 69000   |    30 |
++------+--------+---------+-------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT * FROM PRODUCTS WHERE STOCK > 20 ;
++------+--------+---------+-------+
+| P_ID | P_NAME | P_PRICE | STOCK |
++------+--------+---------+-------+
+|    1 | OM     | 30000   |    45 |
+|    3 | HARI   | 60000   |    40 |
+|    4 | PRIYA  | 70000   |    30 |
+|    5 | ZARA   | 69000   |    30 |
++------+--------+---------+-------+
+4 rows in set (0.005 sec)
+
+mysql> SELECT * FROM PRODUCTS WHERE STOCK < 60 ;
++------+--------+---------+-------+
+| P_ID | P_NAME | P_PRICE | STOCK |
++------+--------+---------+-------+
+|    1 | OM     | 30000   |    45 |
+|    2 | AYAN   | 40000   |    20 |
+|    3 | HARI   | 60000   |    40 |
+|    4 | PRIYA  | 70000   |    30 |
+|    5 | ZARA   | 69000   |    30 |
++------+--------+---------+-------+
+5 rows in set (0.005 sec)
+
+mysql> SELECT * FROM PRODUCTS WHERE P_PRICE > 3000 ;
++------+--------+---------+-------+
+| P_ID | P_NAME | P_PRICE | STOCK |
++------+--------+---------+-------+
+|    1 | OM     | 30000   |    45 |
+|    2 | AYAN   | 40000   |    20 |
+|    3 | HARI   | 60000   |    40 |
+|    4 | PRIYA  | 70000   |    30 |
+|    5 | ZARA   | 69000   |    30 |
++------+--------+---------+-------+
+5 rows in set (0.011 sec)
+
+mysql> SELECT * FROM PRODUCTS WHERE P_NAME LIKE 'AYAN' ;
++------+--------+---------+-------+
+| P_ID | P_NAME | P_PRICE | STOCK |
++------+--------+---------+-------+
+|    2 | AYAN   | 40000   |    20 |
++------+--------+---------+-------+
+1 row in set (0.005 sec)
+
+mysql> SELECT * FROM PRODUCTS WHERE P_ID LIKE 3 ;
++------+--------+---------+-------+
+| P_ID | P_NAME | P_PRICE | STOCK |
++------+--------+---------+-------+
+|    3 | HARI   | 60000   |    40 |
++------+--------+---------+-------+
+1 row in set (0.005 sec)
+
+mysql> -- PAYMENTS ......... !!
+Query OK, 0 rows affected (0.003 sec)
+
+mysql> SELECT * FROM PAYMENTS ;
++--------+--------+------------+--------+
+| PAY_ID | AMOUNT | PAY_DATE   | METHOD |
++--------+--------+------------+--------+
+|      1 |  20000 | 31-8-2004  | CASH   |
+|      2 |  30000 | 28-4-2005  | ONLINE |
+|      3 |  40000 | 14-5-2008  | ONLINE |
+|      4 | 500000 | 28-07-2001 | CASH   |
+|      5 | 700000 | 29-8-2003  | CASH   |
++--------+--------+------------+--------+
+5 rows in set (0.004 sec)
+
+mysql> SELECT * FROM PAYMENTS WHERE AMOUNT > 20000 ;
++--------+--------+------------+--------+
+| PAY_ID | AMOUNT | PAY_DATE   | METHOD |
++--------+--------+------------+--------+
+|      2 |  30000 | 28-4-2005  | ONLINE |
+|      3 |  40000 | 14-5-2008  | ONLINE |
+|      4 | 500000 | 28-07-2001 | CASH   |
+|      5 | 700000 | 29-8-2003  | CASH   |
++--------+--------+------------+--------+
+4 rows in set (0.005 sec)
+
+mysql> SELECT * FROM PAYMENTS WHERE PAY_ID < 1 ;
+Empty set (0.005 sec)
+
+mysql> SELECT * FROM PAYMENTS WHERE PAY_ID < 2 ;
++--------+--------+-----------+--------+
+| PAY_ID | AMOUNT | PAY_DATE  | METHOD |
++--------+--------+-----------+--------+
+|      1 |  20000 | 31-8-2004 | CASH   |
++--------+--------+-----------+--------+
+1 row in set (0.005 sec)
+
+mysql> SELECT * FROM PAYMENSTS WHERE PAY_ID > 1 ;
+ERROR 1146 (42S02): Table 'college.paymensts' doesn't exist
+mysql> SELECT * FROM PAYMENTS WHERE PAY_ID > 1 ;
++--------+--------+------------+--------+
+| PAY_ID | AMOUNT | PAY_DATE   | METHOD |
++--------+--------+------------+--------+
+|      2 |  30000 | 28-4-2005  | ONLINE |
+|      3 |  40000 | 14-5-2008  | ONLINE |
+|      4 | 500000 | 28-07-2001 | CASH   |
+|      5 | 700000 | 29-8-2003  | CASH   |
++--------+--------+------------+--------+
+4 rows in set (0.005 sec)
+
+mysql> SELECT * FROM PAYMENTS WHERE PAY_ID = 30000 ;
+Empty set (0.006 sec)
+
+mysql> SELECT * FROM PAYMENTS WHERE PAY_ID = 4 ;
++--------+--------+------------+--------+
+| PAY_ID | AMOUNT | PAY_DATE   | METHOD |
++--------+--------+------------+--------+
+|      4 | 500000 | 28-07-2001 | CASH   |
++--------+--------+------------+--------+
+1 row in set (0.004 sec)
+
+mysql> SELECT * FROM  PAYMENTS WHERE METHOD LIKE 'ONLINE%' ;
++--------+--------+-----------+--------+
+| PAY_ID | AMOUNT | PAY_DATE  | METHOD |
++--------+--------+-----------+--------+
+|      2 |  30000 | 28-4-2005 | ONLINE |
+|      3 |  40000 | 14-5-2008 | ONLINE |
++--------+--------+-----------+--------+
+2 rows in set (0.004 sec)
+
+mysql> SELECT * FROM PAYMENTS WHERE METHOD LIKE 'CASH' ;
++--------+--------+------------+--------+
+| PAY_ID | AMOUNT | PAY_DATE   | METHOD |
++--------+--------+------------+--------+
+|      1 |  20000 | 31-8-2004  | CASH   |
+|      4 | 500000 | 28-07-2001 | CASH   |
+|      5 | 700000 | 29-8-2003  | CASH   |
++--------+--------+------------+--------+
+3 rows in set (0.005 sec)
+
+mysql> SELECT * FROM PAYMENTS WHERE PAY_DATE LIKE '2%';
++--------+--------+------------+--------+
+| PAY_ID | AMOUNT | PAY_DATE   | METHOD |
++--------+--------+------------+--------+
+|      2 |  30000 | 28-4-2005  | ONLINE |
+|      4 | 500000 | 28-07-2001 | CASH   |
+|      5 | 700000 | 29-8-2003  | CASH   |
++--------+--------+------------+--------+
+3 rows in set (0.006 sec)
+
+mysql>
